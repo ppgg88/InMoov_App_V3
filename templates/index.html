@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Tête</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">InMoov :  Control Panel</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse ml-5 mr-5" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item text-bold">
+            <a class="nav-link text-bold" href="/">Accueil</a>
+          </li>
+          <li class="nav-item text-bold">
+            <a class="nav-link text-bold" href="chatbot">chatbot</a>
+          </li>
+          <li class="nav-item dropdown active text-bold">
+            <a class="nav-link dropdown-toggle text-white text-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Mouvements
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="moov">Mouvements</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="head">Tête</a>
+              <a class="dropdown-item" href="right_arm">Bras Droit</a>
+              <a class="dropdown-item" href="theme/theme3">Mains</a>
+              <a class="dropdown-item" href="theme/theme4">Buste</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      {% if micro_on %}
+      <img src="/static/images/micro_on.png" class="img-fluid mx-auto d-block" width="40" id="mic_change_nav"/>
+      {% else %}
+      <img src="/static/images/micro_off.png" class="img-fluid mx-auto d-block" width="40" id="mic_change_nav"/>
+      {% endif %}
+    </nav>
+
+    <div class="container mt-1">
+      <h1 class="font-weight-bold">Accueil :</h1>
+      <div class="row"> <!-- Titre -->
+        <a class="btn btn-primary btn-lg btn-block" id="rstc1" role="button">carte 0 : reset de la conextion</a>
+        <a class="btn btn-primary btn-lg btn-block" id="rstc2" role="button">carte 1 : reset de la conextion</a>
+    </div>
+       
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        
+
+        $('#rstc1').click(function(){
+          $.ajax({
+            url: '/rstc1',
+            type: 'GET',
+            success: function(response) {
+              console.log(response);
+            }
+          });
+        });
+
+        $('#rstc2').click(function(){
+          $.ajax({
+            url: '/rstc2',
+            type: 'GET',
+            success: function(response) {
+              console.log(response);
+            }
+          });
+        });
+          
+      </script>      
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.16.6/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+</html>

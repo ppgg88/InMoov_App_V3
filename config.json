@@ -1,0 +1,100 @@
+{
+    "nom": "Hugo",
+    "age": 3,
+    "maker": "Paul Giroux",
+    "carte_0": {
+        "com": "com10",
+        "speed": 500000,
+        "timeout": 1
+    },
+    "carte_1": {
+        "com": "com0",
+        "speed": 115200,
+        "timeout": 1
+    },
+    "head": {
+        "rotation": {
+            "arduino": 0,
+            "pin": 12,
+            "speed": 1,
+            "min": 0,
+            "max": 160,
+            "carte": 0,
+            "home": 80
+        },
+        "UpDown": {
+            "arduino": 0,
+            "pin": 11,
+            "speed": 1,
+            "min": 20,
+            "max": 132,
+            "carte": 0,
+            "home": 90
+        },
+        "Mouth": {
+            "arduino": 0,
+            "pin": 10,
+            "speed": 100,
+            "min": 76,
+            "max": 125,
+            "carte": 0,
+            "home": 76
+        },
+        "EyeX": {
+            "arduino": 1,
+            "pin": 11,
+            "speed": 2,
+            "min": 0,
+            "max": 180,
+            "carte": 0,
+            "home": 80
+        },
+        "EyeY": {
+            "arduino": 1,
+            "pin": 12,
+            "speed": 2,
+            "min": 0,
+            "max": 180,
+            "carte": 0,
+            "home": 80
+        }
+    },
+    "right_arm": {
+        "epaule_x": {
+            "arduino": 0,
+            "pin": 9,
+            "speed": 1,
+            "min": 100,
+            "max": 170,
+            "carte": 0,
+            "home": 139
+        },
+        "epaule_y": {
+            "arduino": 0,
+            "pin": 8,
+            "speed": 1,
+            "min": 62,
+            "max": 180,
+            "carte": 0,
+            "home": 125
+        },
+        "epaule_z": {
+            "arduino": 0,
+            "pin": 7,
+            "speed": 100,
+            "min": 0,
+            "max": 180,
+            "carte": 0,
+            "home": 65
+        },
+        "coude": {
+            "arduino": 0,
+            "pin": 5,
+            "speed": 2,
+            "min": 45,
+            "max": 90,
+            "carte": 0,
+            "home": 65
+        }
+    }
+}

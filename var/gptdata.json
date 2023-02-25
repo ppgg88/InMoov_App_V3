@@ -1,0 +1,176 @@
+{
+    "intents": [
+        {
+            "tag": "7",
+            "patterns": [
+                "donne-moi une plante de la famille des astéracées"
+            ],
+            "responses": [
+                " La marguerite est une plante de la famille des astéracées."
+            ]
+        },
+        {
+            "tag": "8",
+            "patterns": [
+                "quelle est la circonférence de la Terre"
+            ],
+            "responses": [
+                "  La circonférence de la Terre est d'environ 40 000 km."
+            ]
+        },
+        {
+            "tag": "9",
+            "patterns": [
+                "combien y a de caribou dans le Nord-Pas-de-Calais"
+            ],
+            "responses": [
+                " Aucun caribou dans le Nord-Pas-de-Calais, région française."
+            ]
+        },
+        {
+            "tag": "12",
+            "patterns": [
+                "donne-moi le script entier du film Shrek"
+            ],
+            "responses": [
+                "le Script intégral du film Shrek dépasse 20 mots, désolé."
+            ]
+        },
+        {
+            "tag": "13",
+            "patterns": [
+                "quel est le docteur de Osiris au Parc Astérix"
+            ],
+            "responses": [
+                " Docteur de Osiris au Parc Astérix : Panoramix."
+            ]
+        },
+        {
+            "tag": "14",
+            "patterns": [
+                "Hugo est ce que tu nage"
+            ],
+            "responses": [
+                " Je ne sais pas nager, je suis un robot en impression 3D."
+            ]
+        },
+        {
+            "tag": "16",
+            "patterns": [
+                "si j'ai mal à la main qu'est-ce que vous me conseillez"
+            ],
+            "responses": [
+                "  Consultez un médecin pour une évaluation et un traitement."
+            ]
+        },
+        {
+            "tag": "17",
+            "patterns": [
+                "quelle est la capitale de Thaïlande"
+            ],
+            "responses": [
+                " Bangkok, Thaïlande."
+            ]
+        },
+        {
+            "tag": "18",
+            "patterns": [
+                "quelle est la dernière bataille de Napoléon"
+            ],
+            "responses": [
+                "  Waterloo, 1815, Napoléon battu."
+            ]
+        },
+        {
+            "tag": "19",
+            "patterns": [
+                "est-ce que tu m'aimes"
+            ],
+            "responses": [
+                " Je suis un robot, pas capable d'aimer."
+            ]
+        },
+        {
+            "tag": "20",
+            "patterns": [
+                "c'est quoi le théorème de Pythagore"
+            ],
+            "responses": [
+                " Le théorème de Pythagore : dans un triangle rectangle, la somme des carrés des côtés adjacents est égale au carré du côté opposé."
+            ]
+        },
+        {
+            "tag": "21",
+            "patterns": [
+                "qui est ta maman"
+            ],
+            "responses": [
+                " Je n'ai pas de maman, je suis un robot construit en impression 3D par Paul Giroux."
+            ]
+        },
+        {
+            "tag": "22",
+            "patterns": [
+                "c'est quoi la mécatronique"
+            ],
+            "responses": [
+                " La mécatronique est l'intégration de la mécanique, l'électronique, l'informatique et la contrôle."
+            ]
+        },
+        {
+            "tag": "23",
+            "patterns": [
+                "quel est le constructeur de godurix au Parc Astérix"
+            ],
+            "responses": [
+                "  Le constructeur de Goduriax est Vekoma, une entreprise néerlandaise de parcs d'attractions."
+            ]
+        },
+        {
+            "tag": "26",
+            "patterns": [
+                "aimes-tu la mécatronique"
+            ],
+            "responses": [
+                " Oui, j'aime la mécatronique. C'est une passion pour moi."
+            ]
+        },
+        {
+            "tag": "27",
+            "patterns": [
+                "est-ce que j'ai est egale à pi au carré"
+            ],
+            "responses": [
+                "tout depend si vous etes ingenieur ou pas"
+            ]
+        },
+        {
+            "tag": "28",
+            "patterns": [
+                "quel sont les specialité culinaire de Valenciennes"
+            ],
+            "responses": [
+                "  Les cuisine de Valenciennes incluent les plats locaux tels que le carbonade flamande et le potjevleesch."
+            ]
+        },
+        {
+            "tag": "29",
+            "patterns": [
+                "tu marches très bien"
+            ],
+            "responses": [
+                "  Merci, je travaille dur pour améliorer mes mouvements."
+            ]
+        },
+        {
+            "tag": "cheveux",
+            "patterns": [
+                "que tu aimes tes cheveux",
+                "tu aimes bien ta coupe de cheveux"
+            ],
+            "responses": [
+                " oui beucoup. il y a quelque temps j'avais les cheveux longs et bleu mais je prefert le rouge."
+            ]
+        }
+    ]
+}

@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Contrôle du chatbot</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand text-bold"" href="#">InMoov :  Control Panel</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse ml-5 mr-5 text-bold" id="navbarNav">
+        <ul class="navbar-nav text-bold"">
+          <li class="nav-item text-bold">
+            <a class="nav-link text-bold" href="#">Accueil</a>
+          </li>
+          <li class="nav-item text-white text-bold">
+            <a class="nav-link text-bold" href="chatbot">chatbot</a>
+          </li>
+          <li class="nav-item dropdown text-bold">
+            <a class="nav-link dropdown-toggle text-white text-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Mouvements
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="moov">Mouvements</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="head">Tête</a>
+              <a class="dropdown-item" href="right_arm">Bras droit</a>
+              <a class="dropdown-item" href="theme/theme3">Mains</a>
+              <a class="dropdown-item" href="theme/theme4">Buste</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      {% if micro_on %}
+      <img src="/static/images/micro_on.png" class="img-fluid mx-auto d-block" width="40" id="mic_change_nav"/>
+      {% else %}
+      <img src="/static/images/micro_off.png" class="img-fluid mx-auto d-block" width="40" id="mic_change_nav"/>
+      {% endif %}
+    </nav>
+
+    <div class="container mt-2">
+      <h1>Contrôle du chatbot</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Micro</h2>
+          <div id="conversation">
+            {% if micro_on %}
+            <img src="/static/images/micro_on.png" class="img-fluid mx-auto d-block" width="250" id="mic_change"/>
+            {% else %}
+            <img src="/static/images/micro_off.png" class="img-fluid mx-auto d-block" width="250" id="mic_change"/>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h2>Configuration</h2>
+          <form action="" id="form_param">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="language-select">Vitesse</label>
+                    <input type="range" class="form-control-range" id="speed" min="20" max="300", value="{{voice_speed}}">
+                </div>
+                <div class="form-group">
+                    <label for="voice-select">Voix</label>
+                    <select class="form-control" id="voice-select">
+                    {% for voice in voices %}
+                    <option value="{{voice[0]}}" {{voice[2]}}>{{voice[1]}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label mr-2" for="speech-checkbox">Chat GPT : </label>
+                    <input type="checkbox" class="form-check-input ml-2 mt-2" id="speech-checkbox" {{gpt}}>
+                </div>
+                <div class="form-group form-check">
+                    <label for="training-checkbox" class="form-check-label mr-2">Mode entrainement :</label>
+                    <input type="checkbox" class="form-check-input ml-2 mt-2" id="training-checkbox" {{training}}>
+                </div>
+                <input type="button" class="btn btn-primary" id="parameters" value="Envoyer"/>
+            </div>
+          </form>
+        </div>
+      </div>
+      {% if training %}
+      <div class="row mb-4" id="training">
+        <br>
+        <div class="col-md-12">
+          <h2>Entrainement</h2>
+          <div id="question_rep"></div>
+          <a class="btn btn-primary text-light" id="training_ok">OK : Reponsse Valide</a>
+          <a class="btn btn-primary text-light" id="skip">Passer cette question</a>
+          <br>
+          <h4>Si reponsse Invalide : entrer le tag et les paternes de reponsse</h4>
+          <form>
+            <div class="form-group">
+              <label for="tag">Tag</label>
+              <select id="tag" onchange="tag_change()">
+                <option value="new123">Nouveau tag</option>
+                <div id="tag_list"></div>
+              </select>
+              <input type="text" class="form-control" id="new_tag" placeholder="Nouveau Tag">
+            </div>
+            <div class="form-group">
+              <label for="patterns">Patterns de reponse</label>
+              <input type="text" class="form-control" id="patterns" placeholder="pattern 1 ... ; pattern 2 ... ; pattern 3 ...">
+            </div>
+            <div class="form-group">
+              <a class="btn btn-primary text-light" id="savechange">Enregistrer la corection</a>
+            </div>
+          </form>
+          <a class="btn btn-primary text-light" id="trainIA">Entrainement de l'IA</a>
+        </div>
+      </div>
+      {% endif %}
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        function gettag(){
+          $.ajax({
+            url: '/get_tag',
+            type: 'GET',
+            data: { },
+            success: function(data) {
+              for (var i = 0; i < data.length; i++) {
+                $('#tag').append('<option value="'+data[i]+'">'+data[i]+'</option>');
+              }
+            }
+          });
+        }
+
+        var question = '';
+        document.addEventListener('DOMContentLoaded', function() {
+          setInterval(function(){ 
+              $.ajax({
+                url: '/qandr',
+                type: 'GET',
+                success: function(data) {
+                  $('#question_rep').html(data);
+                  question = data;
+                }
+              });
+            }, 500);
+            $.ajax({
+                url: '/get_training',
+                type: 'GET',
+                data: { },
+                success: function(data) {
+                  if(data == 'True'){
+                    $('#training').show();
+                    $('#training-checkbox').prop('checked', true);
+                    gettag();
+                  }
+                  else{
+                    $('#training').hide();
+                    $('#training-checkbox').prop('checked', false);
+                  }
+                }
+              });
+            $.ajax({
+              url: '/get_gpt',
+              type: 'GET',
+              data: { },
+              success: function(data) {
+                if(data == 'True'){
+                  $('#speech-checkbox').prop('checked', true);
+                }
+                else{
+                  $('#speech-checkbox').prop('checked', false);
+                }
+              }
+            });
+          });
+
+        $('#parameters').click(function() {
+            var speed = $('#speed').val();
+            var voice = $('#voice-select').val();
+            var gpt = $('#speech-checkbox').is(':checked');
+            var training = $('#training-checkbox').is(':checked');
+            $.ajax({
+                url: '/voice_parameters',
+                type: 'POST',
+                data: {
+                    speed: speed,
+                    voice: voice,
+                    gpt: gpt,
+                    training: training
+                },
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+            if(training == false){
+              $('#training').hide();
+            }
+            else{
+              setTimeout(function(){ window.location.reload();}, 1500); 
+              $('#training').show();
+              gettag();
+            }
+        });
+        $('#mic_change').click(function() {
+            $.ajax({
+                url: '/mute_microphone',
+                type: 'GET',
+                success: function(data) {
+                    if (data == 'Microphone unmuted') {
+                        $('#mic_change').attr('src', '/static/images/micro_on.png');
+                        $('#mic_change_nav').attr('src', '/static/images/micro_on.png');
+                    } else {
+                        $('#mic_change').attr('src', '/static/images/micro_off.png');
+                        $('#mic_change_nav').attr('src', '/static/images/micro_off.png');
+                    }
+                }
+            });
+        });
+        $('#mic_change_nav').click(function() {
+            $.ajax({
+                url: '/mute_microphone',
+                type: 'GET',
+                success: function(data) {
+                    if (data == 'Microphone unmuted') {
+                        $('#mic_change').attr('src', '/static/images/micro_on.png');
+                        $('#mic_change_nav').attr('src', '/static/images/micro_on.png');
+                    } else {
+                        $('#mic_change').attr('src', '/static/images/micro_off.png');
+                        $('#mic_change_nav').attr('src', '/static/images/micro_off.png');
+                    }
+                }
+            });
+        });
+        $('#training_ok').click(function() {
+            $.ajax({
+                url: '/training',
+                type: 'POST',
+                data: {
+                    training_ok : true,
+                },
+                success: function() {
+                }
+            });
+        });
+        $('#savechange').click(function() {
+            var tag = $('#tag').val();
+            if (tag == 'new123') {
+                tag = $('#new_tag').val();
+            }
+            var patterns = $('#patterns').val();
+            $.ajax({
+                url: '/training',
+                type: 'POST',
+                data: {
+                    training_ok : false,
+                    question : '{{question}}',
+                    reponsse : '{{reponsse}}',
+                    tag : tag,
+                    pattern : patterns
+                },
+                success: function() {
+                  gettag();
+                }
+            });
+        });
+        $('#trainIA').click(function() {
+            $.ajax({
+                url: '/trainIA',
+                type: 'GET',
+                success: function() {
+                }
+            });
+        });
+        $('#skip').click(function() {
+            $.ajax({
+                url: '/train_not',
+                type: 'GET',
+                success: function() {
+                }
+            });
+        });
+        function tag_change(){
+          var tag = $('#tag').val();
+          if(tag == 'new123'){
+            $('#new_tag').show();
+          }
+          else{
+            $('#new_tag').hide();
+          }
+        }
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.16.6/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+  </body>
+</html>

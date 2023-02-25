@@ -1,0 +1,46 @@
+{
+    "list":[
+        {
+            "name" : " ",
+            "equivalent":[
+                "'","!",";","-","`",".","?", "hugo"
+            ]
+        },
+        {
+            "name" : " est ",
+            "equivalent" :[
+                " est ", " es ", " et "
+            ]
+        },
+        {
+            "name" : "e",
+            "equivalent":[
+                "é","è","ê","ë"
+            ]
+        },
+        {
+            "name" : "u",
+            "equivalent" : [
+                "ù", "û"
+            ]
+        },
+        {
+            "name" : "a",
+            "equivalent" : [
+                "à", "â"
+            ]
+        },
+        {
+            "name" : "i",
+            "equivalent" : [
+                "ï", "î"
+            ]
+        },
+        {
+            "name" : " quel ",
+            "equivalent" : [
+                " quelle ", " quels ", " quelles "
+            ]
+        }
+    ]
+}
